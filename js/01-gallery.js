@@ -1,5 +1,4 @@
 import { galleryItems } from './gallery-items.js';
-console.log(galleryItems);
 
 // Создадим переменную. Найдем <div class="gallery"></div>
 const gallery = document.querySelector('.gallery');
@@ -28,23 +27,26 @@ galleryItems.forEach(element => {
 });
 // Добавим в переменную `gallery` --> собранную переменную `items`
 gallery.append(...items);
-
+// Добавим событие клика
 gallery.addEventListener('click', event => {
+// Запрещаем действие по умолчанию Метод preventDefault ()
     event.preventDefault();
+// Для проверки типа элемента используем свойство nodeName
+// мы не хотим обрабатывать клики кроме IMG
     if (event.target.nodeName !== 'IMG') {
         return;
     }
-
+// Выбираем IMG по Атрибуту 'data-source'
     const selectedImage = event.target.getAttribute('data-source');
-    console.log(selectedImage);
-
-    const instance = basicLightbox.create(`<img src="${selectedImage}" width="800" height="600">`);
-    console.log(instance)
-        // instance.show()
-
-    //     gallery.addEventListener('keydown', e => {
-    // 		if (e.key === 'Escape') {
-    // 			instance.close()
-    // 		}
-    // 	})
+// Подключаем скрипт и стили библиотеки модального окна basicLightbox.
+    const instance = basicLightbox.create(`
+    <img src="${selectedImage}" width="800" height="600">
+    `);
+    instance.show();
+// Добавляем закрытие модального окна по нажатию клавиши Escape.
+    gallery.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+            instance.close();
+        }
+    });
 });
