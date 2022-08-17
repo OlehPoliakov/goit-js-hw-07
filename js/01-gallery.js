@@ -5,8 +5,8 @@ const gallery = document.querySelector('.gallery');
 const items = [];
 // Переберем масив galleryItems Методом forEach
 galleryItems.forEach(element => {
-    // Создадим тег <div> и добавим атрибут className
-    const galleryItem = document.createElement('div');
+    // Создадим тег <li></li> и добавим атрибут className
+    const galleryItem = document.createElement('li');
     galleryItem.className = 'gallery__item';
     // Создадим тег <а> добавим атрибут className и href
     const galleryLink = document.createElement('a');
